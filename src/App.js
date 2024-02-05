@@ -1,5 +1,5 @@
 import CharacterBuilder from './components/CharacterBuilder';
-import Container from 'react-bootstrap/container';
+import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
 import React, { useState, useEffect } from 'react';
