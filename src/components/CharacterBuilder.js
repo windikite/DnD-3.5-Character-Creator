@@ -25,11 +25,6 @@ function CharacterBuilder({
             return (
                 <div >
                     <h1>Class Selection</h1>
-                    <Selector 
-                        data={data[0]} 
-                        menuName="Class" 
-                        selectedData={classData}
-                        setSelectedData={setClassData} />
                     <List 
                         list={data[0]}
                         name="Class"
@@ -51,11 +46,6 @@ function CharacterBuilder({
             return (
                 <div>
                     <h1>Race Selection</h1>
-                    <Selector 
-                        data={data[1]} 
-                        menuName="Race" 
-                        selectedDataa={raceData}
-                        setSelectedData={setRaceData} />
                     <List 
                         list={data[1]}
                         name="Race"
