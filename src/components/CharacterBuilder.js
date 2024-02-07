@@ -86,7 +86,9 @@ function CharacterBuilder({
                 selectedRace={raceData} 
                 selectedClass={classData}
                 />
-            {checkStage(stage)}
+            <Container className='mt-3 mb-3 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
+                {checkStage(stage)}
+            </Container>
         </Container>
         
      );
