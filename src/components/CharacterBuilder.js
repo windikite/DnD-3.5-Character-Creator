@@ -13,8 +13,47 @@ function CharacterBuilder({
         characterData, 
         setCharacterData,
     }) {
-    const [classData, setClassData] = useState();
-    const [raceData, setRaceData] = useState();
+    const dummy = {
+        _id: "",
+        name: "",
+        helpText: "",
+        hitDice: "",
+        levelMod: 0,
+        size: "",
+        speed: 0,
+        source: [
+            {
+                book: "",
+                page: null
+            }
+        ],
+        saves: {
+            fort: "",
+            will: "",
+            ref: ""
+        },
+        skillPointModifier: 0,
+        skills: "",
+        statBonuses: {
+            con: 0,
+            str: 0,
+            dex: 0,
+            wis: 0,
+            int: 0,
+            cha: 0
+        },
+        features: {
+            lv1: [
+                {
+                    name: "",
+                    text: ""
+                }
+            ]
+        }
+    };
+
+    const [classData, setClassData] = useState(dummy);
+    const [raceData, setRaceData] = useState(dummy);
 
     function checkStage(stage){
         if(stage === 0){
@@ -28,14 +67,14 @@ function CharacterBuilder({
                     <List 
                         list={data[0]}
                         name="Class"
-                        h1="Level Mod"
+                        h1="Features"
                         h2="Help Text"
                         h3="Saves"  
                         h4="Skills"
                         h5="Source"
-                        c1="levelMod"
+                        c1="features[lv1]"
                         c2="helpText"
-                        c3={["fort", "will", "ref"]}
+                        c3="saves"
                         c4="skills"
                         c5="source"
                         setSelectedData={setClassData}
@@ -49,12 +88,12 @@ function CharacterBuilder({
                     <List 
                         list={data[1]}
                         name="Race"
-                        h1="Level Mod"
+                        h1="Features"
                         h2="Help Text"
                         h3="Stat Bonuses"  
                         // h4="Skills"
                         h5="Source"
-                        c1="levelMod"
+                        c1="features[lv1]"
                         c2="helpText"
                         c3={["con", "str", "dex", "wis", "int", "cha"]}
                         // c4="skills"
@@ -70,12 +109,12 @@ function CharacterBuilder({
         <Container>
             <ProgressBar stage={stage} />
             <NameInput />
-            <CharacterSheet 
+            {/* <CharacterSheet 
                 // raceData={data[1]} 
                 // classData={data[0]} 
                 selectedRace={raceData} 
                 selectedClass={classData}
-                />
+                /> */}
             <Container className='mt-3 mb-3 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
                 {checkStage(stage)}
             </Container>
