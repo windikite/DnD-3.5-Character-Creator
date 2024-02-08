@@ -5,40 +5,34 @@ function CharacterSheet({
     selectedRace,
     selectedClass
 }) {
-    // const race = selectedRace ? selectedRace : null;
-    // const startingClass = selectedClass ? selectedClass : null;
-    // const sources = [];
-    const dummy = {
-        name: "No Data",
-            "helpText": "helptext",
-            "levelMod": 0,
-            "source": [
-                "DummyBook",
-                "1"
-            ],
-            "con": 0,
-            "str": 0,
-            "dex": 0,
-            "wis": 0,
-            "int": 0,
-            "cha": 0
-    }
     const sources = [];
-    const race = selectedRace ? checkIn(selectedRace) : [];
-    const startingClass = selectedClass ? checkIn(selectedClass) : [];
+    const features = [];
+    const race = checkIn(selectedRace);
+    const startingClass = checkIn(selectedClass);
+    
+
+    const allSources = sources ? sources.map(x => <li>{x}</li>) : [];
+    const allSkills = startingClass.skills ? startingClass.skills.split(", ").map(x => <li>{x}</li>) : null;
+    const allStatBonuses = selectedRace ? getStatBonuses(selectedRace) : [];
+    const allFeatures = features ? features.map(x => <li>{x[0]}</li>) : [];
     
     function checkIn(item){
         console.log('item', item)
-        const page = [item.source[0], item.source[1]];
-        sources.push(page)
+        //handle books
+        const page = (item.source.book !== null && item.source.book !== undefined) ? `${item.source.book} pg.${item.source.page}` : null;
+        if(page !== null){
+            sources.push(page)
+        };
         console.log(`sources`, sources)
+        //handle features
+        if(item.features.lv1[0].name !== null && item.features.lv1[0].name !== undefined){
+            item.features.lv1.forEach(x => {
+                features.push([x.name, x.text]);
+            })
+        }
         return item
     }
 
-    const allSources = sources ? sources.map(x => <p>{x}</p>) : [];
-    const allSkills = startingClass.skills ? startingClass.skills.split(", ").map(x => <li>{x}</li>) : null;
-    const allStatBonuses = selectedRace ? getStatBonuses(selectedRace) : [];
-    
     function getStatBonuses(item){
         let con = item.con ? item.con : 0;
         let str = item.str ? item.str : 0;
@@ -62,8 +56,8 @@ function CharacterSheet({
             
             <h1>Bob the level {race.levelMod + startingClass.levelMod} {race.name} {startingClass.name}</h1>
             <hr />
-            <div>
-                <Container >
+            <div className="d-flex">
+                <Container className='m-2 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
                     <Container>Con: {allStatBonuses.con}</Container>
                     <Container>Str: {allStatBonuses.str}</Container>
                     <Container>Dex: {allStatBonuses.dex}</Container>
@@ -71,17 +65,23 @@ function CharacterSheet({
                     <Container>Int: {allStatBonuses.int}</Container>
                     <Container>Cha: {allStatBonuses.cha}</Container>
                 </Container>
+                <Container className='m-2 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
+                    <h2>Features</h2>
+                    <ul>
+                        {allFeatures}
+                    </ul>
+                </Container>
             </div>
 
             <div className="d-flex">
-                <Container className='mt-3 mb-3 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
+                <Container className='m-2 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
                     <h2>Class Skills:</h2>
                     <ul>
                         {allSkills}
                     </ul>
                 </Container>
 
-                <Container className='mt-3 mb-3 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
+                <Container className='m-2 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
                     <h2>Sources:</h2>
                     <ul>
                         {allSources}

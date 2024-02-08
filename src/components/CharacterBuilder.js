@@ -23,7 +23,7 @@ function CharacterBuilder({
         speed: 0,
         source: [
             {
-                book: "",
+                book: null,
                 page: null
             }
         ],
@@ -45,8 +45,8 @@ function CharacterBuilder({
         features: {
             lv1: [
                 {
-                    name: "",
-                    text: ""
+                    name: null,
+                    text: null
                 }
             ]
         }
@@ -68,12 +68,12 @@ function CharacterBuilder({
                         list={data[0]}
                         name="Class"
                         h1="Features"
-                        h2="Help Text"
+                        h2=""
                         h3="Saves"  
                         h4="Skills"
                         h5="Source"
-                        c1="features[lv1]"
-                        c2="helpText"
+                        c1={["features", "lv1"]}
+                        c2=""
                         c3="saves"
                         c4="skills"
                         c5="source"
@@ -89,14 +89,14 @@ function CharacterBuilder({
                         list={data[1]}
                         name="Race"
                         h1="Features"
-                        h2="Help Text"
+                        h2="Size"
                         h3="Stat Bonuses"  
-                        // h4="Skills"
+                        h4=""
                         h5="Source"
-                        c1="features[lv1]"
-                        c2="helpText"
-                        c3={["con", "str", "dex", "wis", "int", "cha"]}
-                        // c4="skills"
+                        c1={["features", "lv1"]}
+                        c2="size"
+                        c3="statBonuses"
+                        c4=""
                         c5="source"
                         setSelectedData={setRaceData}
                         />
@@ -107,14 +107,14 @@ function CharacterBuilder({
     
     return ( 
         <Container>
-            <ProgressBar stage={stage} />
             <NameInput />
-            {/* <CharacterSheet 
+            <CharacterSheet 
                 // raceData={data[1]} 
                 // classData={data[0]} 
                 selectedRace={raceData} 
                 selectedClass={classData}
-                /> */}
+                />
+            <ProgressBar stage={stage} />
             <Container className='mt-3 mb-3 p-3 bg-dark-subtle border border-dark-subtle rounded-3'>
                 {checkStage(stage)}
             </Container>

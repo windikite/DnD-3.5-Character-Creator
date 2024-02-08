@@ -32,23 +32,36 @@ function Item({
     //     }
         
     // }
-    function checkVariable(c){
-        let data = item[c];
-        if(typeof data === 'object' || data instanceof Object){
-            const output = [];
+    function checkVariable(property){
+        let data
+        if(property instanceof Array){
+            let parentData = item[property[0]];
+            let childData = parentData[property[1]];
+            data = childData;
+            // console.log(`found array`, property, `data`, data)
+        }else{
+            data = item[property]
+        }
+
+        const output = [];
+        if(Array.isArray(data)){
+            const array = [];
+            data.forEach(arrayItem => {
+                array.push(`${arrayItem.name}`);
+            })
+            output.push(array.map(x => {return <li>{x}</li>}))
+            // console.log(`output`, output, `found array`)
+        }else if(typeof data === 'object' && data instanceof Object){
             const keys = Object.keys(data);
             const values = Object.values(data);
             for (let i = 0; i < keys.length; i++) {
                 output.push(`${keys[i]}: ${values[i]} `)
             }
-            console.log(`keys`, keys, `values`, values, `output`, output)
-            return <td>{output}</td>
-        }else if(typeof data === 'array' || data instanceof Array){
-
+            // console.log(`keys`, keys, `values`, values, `output`, output)
         }else{
             return <td>{data}</td>
         }
-        
+        return <td>{output}</td>
     };
     const column1 = c1 ? checkVariable(c1) : null;
     const column2 = c2 ? checkVariable(c2) : null;
