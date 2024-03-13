@@ -37,13 +37,21 @@ function CharacterSheet({
         if(characterData.classes.length > 0){
             characterData.classes.map(x => {
                 const tempArray = x.table ? x.table['1st'][4] : []
-                tempArray.map(x => {
-                    let found = featureArray.findIndex(e => e == x)
-                    console.log(found)
+                console.log('tempArray', tempArray)
+                if(tempArray instanceof Array){
+                    tempArray.map(x => {
+                        let found = featureArray.findIndex(e => e == x)
+                        if(found == -1){
+                            featureArray.push(x)
+                        }
+                    })
+                }else{
+                    let found = featureArray.findIndex(e => e == tempArray)
                     if(found == -1){
-                        featureArray.push(x)
+                        featureArray.push(tempArray)
                     }
-                })
+                }
+                
             })
             featureArray.sort((a, b) => a - b)
             featureArray.map((x, index) => {

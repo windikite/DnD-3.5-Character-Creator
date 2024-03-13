@@ -24,7 +24,7 @@ function Item({
                     let tempArray = []
                     for (let x = 0; x < propertyArray.length; x++) {
                         if(typeof propertyArray[x] === 'object' && propertyArray[x] instanceof Object){
-                            tempArray.push(`${propertyArray[x][0]}: ${tempData[i]} `)
+                            tempArray.push(`${propertyArray[x][0]}: ${tempData[x+1]} `)
                         }else{
                             tempArray.push(tempData[propertyArray[x]])
                         }
