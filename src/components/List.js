@@ -14,7 +14,11 @@ function List({
     c3,
     c4,
     c5,
-    setSelectedData
+    setSelectedData,
+    symbol1,
+    symbol2,
+    params1,
+    params2
 }) {
     const name1 = name ? <th scope="col">{name}</th> : null;
     const header1 = h1 ? <th scope="col">{h1}</th> : null;
@@ -43,7 +47,7 @@ function List({
                         </thead>
                         <tbody>
                             {list.map((item, index) => <Item 
-                                key={item.id} 
+                                rowKey={item._id} 
                                 item={list[index]} 
                                 c1={c1}
                                 c2={c2}
@@ -51,8 +55,11 @@ function List({
                                 c4={c4}
                                 c5={c5}
                                 setSelectedData={setSelectedData}
+                                symbol1={symbol1}
+                                symbol2={symbol2}
+                                params1={params1}
+                                params2={params2}
                                 />)}
-                                
                         </tbody>
                     </table>
                 </>
